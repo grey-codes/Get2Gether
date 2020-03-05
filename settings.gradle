@@ -1,0 +1,2 @@
+rootProject.name='Get2Gether'
+include ':app'
