@@ -8,25 +8,27 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.get2gether.LoginFragment"
+        android:name="com.get2gether.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+        <action android:id="@+id/action_FirstFragment_self" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.get2gether.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/LoginFragment"
+        android:name="com.get2gether.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_LoginFragment_to_FirstFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/FirstFragment" />
     </fragment>
     <action
         android:id="@+id/prompt_Login"
+        app:destination="@id/LoginFragment" />
+    <action
+        android:id="@+id/action_goHome"
         app:destination="@id/FirstFragment" />
 </navigation>

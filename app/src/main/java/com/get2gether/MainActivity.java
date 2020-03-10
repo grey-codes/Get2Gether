@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
+                DrawerLayout mDrawerLayout;
+                mDrawerLayout = findViewById(R.id.drawer_layout);
                 switch (id) {
                     case R.id.account:
                         Toast.makeText(MainActivity.this, "My Account", Toast.LENGTH_SHORT).show();
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_sign_out:
                         signOut();
+                        mDrawerLayout.closeDrawers();
                         break;
                     default:
                         return true;
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateLoginUI() {
         MenuItem signOutItem = nv.getMenu().findItem(R.id.menu_sign_out);
         signOutItem.setVisible(googleAccount != null);
+
     }
 
     private void signOut() {
@@ -97,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        googleAccount = null;
                         Toast.makeText(MainActivity.this, "Signed Out...", Toast.LENGTH_SHORT).show();
-                        //TODO: Update UI
+                        Navigation.findNavController(fcv).navigate(R.id.action_goHome);
                         updateLoginUI();
                     }
                 });

@@ -18,4 +18,5 @@
     <string name="Close">Close</string>
     <string name="app_icon">App Icon</string>
     <string name="sign_out">Sign Out</string>
+    <string name="login_fragment_label">Log In</string>
 </resources>

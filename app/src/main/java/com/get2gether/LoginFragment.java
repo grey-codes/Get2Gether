@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,11 +18,11 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+
 public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 7;
     private MainActivity parentActivity;
     private SignInButton signInButton;
-    private TextView welcomeText;
 
     @Override
     public View onCreateView(
@@ -31,7 +30,7 @@ public class LoginFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -47,26 +46,14 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-        welcomeText = view.findViewById(R.id.welcomeView);
         updateLoginUI();
-
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(LoginFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
     }
 
     private void updateLoginUI() {
         if (parentActivity.googleAccount == null) {
             signInButton.setVisibility(View.VISIBLE);
-            welcomeText.setVisibility(View.INVISIBLE);
         } else {
             signInButton.setVisibility(View.INVISIBLE);
-            welcomeText.setVisibility(View.VISIBLE);
-            welcomeText.setText(getString(R.string.welcome, parentActivity.googleAccount.getDisplayName()));
         }
         parentActivity.updateLoginUI();
     }
@@ -92,6 +79,8 @@ public class LoginFragment extends Fragment {
             parentActivity.googleAccount = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
             Toast.makeText(this.getContext(), "Success", Toast.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(LoginFragment.this)
+                    .navigate(R.id.action_LoginFragment_to_FirstFragment);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
