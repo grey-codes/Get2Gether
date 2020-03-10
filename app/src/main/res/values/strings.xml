@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="welcome">Welcome, %1$s</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="server_client_id">514724789354-n3k8s5o05agamas88lbcchojvb5fnaqm.apps.googleusercontent.com</string>
