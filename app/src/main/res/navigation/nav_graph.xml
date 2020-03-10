@@ -26,4 +26,7 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <action
+        android:id="@+id/prompt_Login"
+        app:destination="@id/FirstFragment" />
 </navigation>
