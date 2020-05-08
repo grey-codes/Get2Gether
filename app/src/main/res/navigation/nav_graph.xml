@@ -15,7 +15,9 @@
         <action android:id="@+id/action_FirstFragment_self" />
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            tools:ignore="PrivateResource" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -43,4 +45,9 @@
     <action
         android:id="@+id/goToSecondFrag"
         app:destination="@id/SecondFragment" />
+    <fragment
+        android:id="@+id/mySettingsFragment"
+        android:name="com.get2gether.MySettingsFragment"
+        android:label="MySettingsFragment" />
+    <action android:id="@+id/action_global_mySettingsFragment" app:destination="@id/mySettingsFragment" />
 </navigation>

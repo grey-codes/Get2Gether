@@ -61,31 +61,27 @@ public class MainActivity extends AppCompatActivity {
         nv = findViewById(R.id.nav_view);
 
 
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                DrawerLayout mDrawerLayout;
-                mDrawerLayout = findViewById(R.id.drawer_layout);
-                switch (id) {
-                    case R.id.account:
-                        Toast.makeText(MainActivity.this, "My Account", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.settings:
-                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.menu_sign_out:
-                        signOut();
-                        mDrawerLayout.closeDrawers();
-                        break;
-                    default:
-                        return true;
-                }
-
-
-                return true;
-
+        nv.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            switch (id) {
+                case R.id.account:
+                    Toast.makeText(MainActivity.this, "My Account", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.settings:
+                   Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
+                    dl.closeDrawers();
+                    break;
+                case R.id.menu_sign_out:
+                    signOut();
+                    dl.closeDrawers();
+                    break;
+                default:
+                    return true;
             }
+
+
+            return true;
+
         });
 
         updateLoginUI();
@@ -100,14 +96,11 @@ public class MainActivity extends AppCompatActivity {
     private void signOut() {
         final Activity act = this;
         mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        googleAccount = null;
-                        Toast.makeText(MainActivity.this, "Signed Out...", Toast.LENGTH_SHORT).show();
-                        Navigation.findNavController(fcv).navigate(R.id.action_goHome);
-                        updateLoginUI();
-                    }
+                .addOnCompleteListener(this, task -> {
+                    googleAccount = null;
+                    Toast.makeText(MainActivity.this, "Signed Out...", Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(fcv).navigate(R.id.action_goHome);
+                    updateLoginUI();
                 });
     }
 
