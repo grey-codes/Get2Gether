@@ -15,6 +15,7 @@ public class HomeFragment extends Fragment {
     private MainActivity parentActivity;
     private TextView welcomeText;
     private Button loginButton;
+    private Button goToSecondFrag;
 
     @Override
     public View onCreateView(
@@ -33,12 +34,21 @@ public class HomeFragment extends Fragment {
 
         welcomeText = view.findViewById(R.id.welcomeView);
         loginButton = view.findViewById(R.id.button_login);
+        goToSecondFrag = view.findViewById(R.id.goToSecondFrag);
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(HomeFragment.this)
                         .navigate(R.id.prompt_Login);
+            }
+        });
+        goToSecondFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.goToSecondFrag);
             }
         });
         updateLoginUI();
