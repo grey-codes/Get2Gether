@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         int act = getIntent().getIntExtra("act",ACTION_NONE);
         switch (act) {
             case ACTION_VIEW_MEETINGS:
-                
+
         }
 
         updateLoginUI();
