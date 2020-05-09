@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity {
         int act = getIntent().getIntExtra("act",ACTION_NONE);
         switch (act) {
             case ACTION_VIEW_MEETINGS:
-
+                Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
+                break;
+            default:
+                break;
         }
 
         updateLoginUI();

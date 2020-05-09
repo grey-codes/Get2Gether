@@ -26,11 +26,6 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() +
                         5 * 1000,5*1000,               alarmIntent);
         System.out.println("take me out to the back of the shed, shoot me in the back of the head");
-
-        // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(context, ViewMeetings.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
     }
 
     @Override
@@ -38,6 +33,12 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
         String action = intent.getAction();
         //Intent serviceIntent = null;
         if (ACTION_START_NOTIFICATION_SERVICE.equals(action)) {
+
+            // Create an explicit intent for an Activity in your app
+            Intent launchViewMeetings = new Intent(context, ViewMeetings.class);
+            launchViewMeetings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchViewMeetings, 0);
+
             Log.i(getClass().getSimpleName(), "onReceive from alarm, starting notification service");
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "AAAAA")
                     .setSmallIcon(R.drawable.ic_android_black_24dp)
@@ -45,6 +46,7 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
                     .setContentText("Much longer text that cannot fit one line...")
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText("Much longer text that cannot fit one line..."))
+                    .setContentIntent(pendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
