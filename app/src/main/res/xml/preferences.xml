@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="notifications_category"
+        android:title="Notifications">
+
+        <SwitchPreferenceCompat
+            android:key="notifications"
+            android:defaultValue="true"
+            android:title="Enable message notifications"/>
+
+        <SeekBarPreference
+            android:key="notificationTime"
+            android:max="120"
+            android:min="5"
+            android:defaultValue="60"
+            android:title="How often to check for notifications"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="help_category"
+        android:title="Help">
+
+        <Preference
+            android:key="feedback"
+            android:summary="Report technical issues or suggest new features"
+            android:title="Send feedback"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
