@@ -1,6 +1,9 @@
 package com.get2gether;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,10 +32,32 @@ public class MainActivity extends AppCompatActivity {
     FragmentContainerView fcv;
     private ActionBarDrawerToggle t;
 
+    public static final int ACTION_NONE = 0;
+    public static final int ACTION_VIEW_MEETINGS = 1;
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = ("AAAAA");
+            String description = ("aaaaaaaaaaaaa");
+            int importance = NotificationManager.IMPORTANCE_MAX;
+            NotificationChannel channel = new NotificationChannel("AAAAA", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        createNotificationChannel();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CustomNotifications.setupAlarm(getApplicationContext());
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.server_client_id))
@@ -87,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        int act = getIntent().getIntExtra("act",ACTION_NONE);
+        switch (act) {
+            case ACTION_VIEW_MEETINGS:
+                
+        }
 
         updateLoginUI();
     }

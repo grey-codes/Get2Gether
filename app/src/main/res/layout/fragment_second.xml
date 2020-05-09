@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/fab_margin"
-    android:background="#fff"
+    android:background="#202225"
     tools:context=".fragment_second">
 
     <androidx.gridlayout.widget.GridLayout
@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#fff"
         app:columnCount="5"
         app:rowCount="14">
 
@@ -27,6 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/fab_margin"
-        android:background="#fff"
+        android:textColor="#ffffff"
         android:text="@string/next" />
 </LinearLayout>

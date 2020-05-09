@@ -27,7 +27,7 @@ public class fragment_second extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    InteractiveRectangle[][] rectangles = new InteractiveRectangle[14][5];
+    private InteractiveRectangle[][] rectangles = new InteractiveRectangle[14][5];
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,8 +62,6 @@ public class fragment_second extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     boolean status;
@@ -91,7 +89,7 @@ public class fragment_second extends Fragment {
 
 
                 for (int a = 0; a < rectangles.length; a++) {
-                    rectangles[a][0] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, Color.WHITE, android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
+                    rectangles[a][0] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
                     rectangles[a][0].setCanBeToggled(false);
                     GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                     params.height = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -105,7 +103,7 @@ public class fragment_second extends Fragment {
 
 
                 for (int b = 1; b < rectangles[0].length; b++) {
-                    rectangles[0][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, Color.WHITE, android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
+                    rectangles[0][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
                     rectangles[0][b].setCanBeToggled(false);
                     GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                     params.height = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -118,7 +116,7 @@ public class fragment_second extends Fragment {
 
                 for (int a = 1; a < rectangles.length; a++) {
                     for (int b = 1; b < rectangles[a].length; b++) {
-                        rectangles[a][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, Color.WHITE, android.graphics.Color.argb(255, 84, 130, 53), android.graphics.Color.argb(255, 166, 166, 166));
+                        rectangles[a][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 84, 160, 53), android.graphics.Color.argb(255, 95, 97, 110));
                         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                         params.height = GridLayout.LayoutParams.WRAP_CONTENT;
                         params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -152,13 +150,11 @@ public class fragment_second extends Fragment {
                 layout.setOnTouchListener( (View.OnTouchListener) (view, event) -> {
                     GridLayout layout1 = (GridLayout)view;
 
-                    for(int i = 0; i< layout1.getChildCount(); i++)
-                    {
+                    for(int i = 0; i< layout1.getChildCount(); i++) {
 
                         View rect = layout1.getChildAt(i);
                         Rect outRect = new Rect(rect.getLeft(), rect.getTop(), rect.getRight(), rect.getBottom());
-                        if(outRect.contains((int)event.getX(), (int)event.getY()) && rect instanceof InteractiveRectangle)
-                        {
+                        if(outRect.contains((int)event.getX(), (int)event.getY()) && rect instanceof InteractiveRectangle) {
                             // over a View
                             InteractiveRectangle irect = (InteractiveRectangle) rect;
                             if (event.getActionMasked()==MotionEvent.ACTION_DOWN) {
@@ -171,10 +167,6 @@ public class fragment_second extends Fragment {
                 });
             }
         });
-
-
-
-
 
 
         return v;
