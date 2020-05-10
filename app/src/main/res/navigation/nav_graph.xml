@@ -47,7 +47,16 @@
         android:id="@+id/mySettingsFragment"
         android:name="com.get2gether.MySettingsFragment"
         android:label="MySettingsFragment" />
-    <action android:id="@+id/action_global_mySettingsFragment" app:destination="@id/mySettingsFragment" />
+    <action android:id="@+id/action_global_mySettingsFragment"
+        app:destination="@id/mySettingsFragment"
+
+        />
+    <fragment
+        android:id="@+id/ViewMeetingFragment"
+        android:name="com.get2gether.ViewMeetingFragment"
+        android:label="fragment_view_meeting"
+        tools:layout="@layout/fragment_view_meeting" />
+    <action android:id="@+id/action_global_viewMeetingFragment" app:destination="@id/ViewMeetingFragment" />
     <fragment
         android:id="@+id/fragment_makemeeting"
         android:name="com.get2gether.fragment_makemeeting"
