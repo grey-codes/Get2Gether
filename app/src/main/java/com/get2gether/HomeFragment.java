@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.goToSecondFrag);
+                        .navigate(R.id.goToMakeMeeting);
             }
         });
         updateLoginUI();

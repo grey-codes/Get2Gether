@@ -14,10 +14,8 @@
 
         <action android:id="@+id/action_FirstFragment_self" />
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            tools:ignore="PrivateResource" />
+            android:id="@+id/goToMakeMeeting"
+            app:destination="@id/fragment_makemeeting" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -50,4 +48,13 @@
         android:name="com.get2gether.MySettingsFragment"
         android:label="MySettingsFragment" />
     <action android:id="@+id/action_global_mySettingsFragment" app:destination="@id/mySettingsFragment" />
+    <fragment
+        android:id="@+id/fragment_makemeeting"
+        android:name="com.get2gether.fragment_makemeeting"
+        android:label="fragment_makemeeting"
+        tools:layout="@layout/fragment_makemeeting" >
+        <action
+            android:id="@+id/makeMeetingToTimes"
+            app:destination="@id/SecondFragment" />
+    </fragment>
 </navigation>
