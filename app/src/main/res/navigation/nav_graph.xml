@@ -22,6 +22,9 @@
         android:name="com.get2gether.fragment_second"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_SecondFragment_to_fragment_meetingsuccess"
+            app:destination="@id/fragment_meetingsuccess" />
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
@@ -65,5 +68,14 @@
         <action
             android:id="@+id/makeMeetingToTimes"
             app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_meetingsuccess"
+        android:name="com.get2gether.fragment_meetingsuccess"
+        android:label="fragment_meetingsuccess"
+        tools:layout="@layout/fragment_meetingsuccess" >
+        <action
+            android:id="@+id/action_fragment_meetingsuccess_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

@@ -117,11 +117,11 @@ public class fragment_makemeeting extends Fragment {
                 TextView textViewMeeting = view.getRootView().findViewById(R.id.projectName);
                 TextView textViewParticipants = view.getRootView().findViewById(R.id.participants);
 
-                String dayValue = spinnerDay.getSelectedItem().toString();
-                String monthValue = spinnerMonth.getSelectedItem().toString();
-                String yearValue = spinnerYear.getSelectedItem().toString();
-                String meetingName = textViewMeeting.getText().toString();
-                String participants = textViewParticipants.getText().toString();
+                //String dayValue = spinnerDay.getSelectedItem().toString();
+                //String monthValue = spinnerMonth.getSelectedItem().toString();
+                //String yearValue = spinnerYear.getSelectedItem().toString();
+                //String meetingName = textViewMeeting.getText().toString();
+                //String participants = textViewParticipants.getText().toString();
 
 
 

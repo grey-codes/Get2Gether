@@ -13,8 +13,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 
 import androidx.gridlayout.widget.GridLayout;
+import androidx.navigation.fragment.NavHostFragment;
 
 
 /**
@@ -168,7 +170,16 @@ public class fragment_second extends Fragment {
             }
         });
 
+        Button goToSuccess = v.findViewById(R.id.goToSuccess);
+        goToSuccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(fragment_second.this)
+                        .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess);
+            }
+        });
 
         return v;
     }
+
 }
