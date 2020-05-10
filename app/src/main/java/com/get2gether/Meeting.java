@@ -3,16 +3,26 @@ package com.get2gether;
 import java.util.Date;
 
 public class Meeting {
+    private int id;
     private java.util.Date date;
     private String owner;
     private String title;
     private String timeString;
 
-    public Meeting(Date date, String owner, String title, String timeString) {
+    public Meeting(int id, Date date, String owner, String title, String timeString) {
+        this.id = id;
         this.date = date;
         this.owner = owner;
         this.title = title;
         this.timeString = timeString;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getDate() {

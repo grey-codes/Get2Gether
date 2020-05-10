@@ -39,8 +39,8 @@ public class ViewMeetingFragment extends Fragment {
         Context ctx = getContext();
 
         meetingList = new ArrayList<>();
-        meetingList.add(new Meeting(new Date(),"Grey Ruessler","Fuck you","05/23/2000 6:00-9:00"));
-        meetingList.add(new Meeting(new Date(),"Garry Russel","Fuck you too","05/23/2000 6:00-9:00"));
+        meetingList.add(new Meeting(0,new Date(),"Grey Ruessler","Fuck you","05/23/2000 6:00-9:00"));
+        meetingList.add(new Meeting(1,new Date(),"Garry Russel","Fuck you too","05/23/2000 6:00-9:00"));
 
 
         populateMeetings(ctx, view);
