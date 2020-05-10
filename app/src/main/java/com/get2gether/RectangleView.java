@@ -17,7 +17,7 @@ class RectangleView extends View {
     private int borderSize;
     private int foregroundColor;
     private int backgroundColor;
-    private int textSize;
+    private double textSize;
     private String text;
 
     public RectangleView (Context context, int xPos, int yPos, int width, int height, int borderSize, int backgroundColor, int foregroundColor) {
@@ -30,7 +30,7 @@ class RectangleView extends View {
         this.borderSize = borderSize;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;
-        textSize = 100;
+        textSize = 1;
         text = "";
         paint = new Paint();
     }
@@ -58,7 +58,7 @@ class RectangleView extends View {
         return backgroundColor;
     }
 
-    public int getTextSize() {
+    public double getTextSize() {
         return textSize;
     }
 
@@ -90,7 +90,7 @@ class RectangleView extends View {
         backgroundColor = newBackgroundColor;
     }
 
-    public void setTextSize(int size) {
+    public void setTextSize(double size) {
         textSize = size;
     }
 
@@ -107,7 +107,8 @@ class RectangleView extends View {
         canvas.drawRect(xPos + borderSize, yPos + borderSize, getMeasuredWidth() - borderSize * 2, getMeasuredHeight() - borderSize * 2, paint);
 
         paint.setColor(Color.WHITE);
-        paint.setTextSize(textSize);
+        int scaledSize = (int)(getResources().getDimensionPixelSize(R.dimen.number_font_size) * textSize);
+        paint.setTextSize(scaledSize);
 
         Rect bounds = new Rect();
         paint.getTextBounds(text,0,text.length(),bounds);
