@@ -111,17 +111,19 @@ public class fragment_makemeeting extends Fragment {
         goToSecondFrag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Spinner spinnerDay = view.findViewById(R.id.spinnerDay);
-                Spinner spinnerMonth = view.findViewById(R.id.spinnerMonth);
-                Spinner spinnerYear = view.findViewById(R.id.spinnerYear);
-                TextView textViewMeeting = view.findViewById(R.id.projectName);
-                TextView textViewParticipants = view.findViewById(R.id.participants);
+                Spinner spinnerDay = view.getRootView().findViewById(R.id.spinnerDay);
+                Spinner spinnerMonth = view.getRootView().findViewById(R.id.spinnerMonth);
+                Spinner spinnerYear = view.getRootView().findViewById(R.id.spinnerYear);
+                TextView textViewMeeting = view.getRootView().findViewById(R.id.projectName);
+                TextView textViewParticipants = view.getRootView().findViewById(R.id.participants);
 
                 String dayValue = spinnerDay.getSelectedItem().toString();
                 String monthValue = spinnerMonth.getSelectedItem().toString();
                 String yearValue = spinnerYear.getSelectedItem().toString();
                 String meetingName = textViewMeeting.getText().toString();
                 String participants = textViewParticipants.getText().toString();
+
+
 
 
                 NavHostFragment.findNavController(fragment_makemeeting.this)
