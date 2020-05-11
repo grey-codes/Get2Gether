@@ -72,13 +72,11 @@ public class fragment_meetingsuccess extends Fragment {
                 }
                 else if (value==null) {
                     value=s;
-                } else {
                     System.out.println(key+"||"+value);
                     passthrough.put(key,value);
                     key=null;
                     value=null;
                 }
-
             }
         }
     }

@@ -31,6 +31,7 @@ public class fragment_second extends Fragment {
 
     public static final int ACTION_DEFAULT = 0;
     public static final int ACTION_MAKEMEETING = 1;
+    public static final int ACTION_CONFMEETING = 2;
 
 
     private InteractiveRectangle[][] rectangles = new InteractiveRectangle[14][5];
@@ -189,14 +190,25 @@ public class fragment_second extends Fragment {
 
         Button goToSuccess = v.findViewById(R.id.goToSuccess);
 
-        if (action==ACTION_MAKEMEETING) {
-            goToSuccess.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(fragment_meetingsuccess.ARG_RECTANGLES,getSelectedItems());
-                bundle.putStringArrayList(fragment_meetingsuccess.ARG_PASSTHROUGH,pass);
-                NavHostFragment.findNavController(fragment_second.this)
-                        .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess,bundle);
-            });
+        switch(action) {
+            case ACTION_MAKEMEETING:
+                goToSuccess.setOnClickListener(view -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(fragment_meetingsuccess.ARG_RECTANGLES,getSelectedItems());
+                    bundle.putStringArrayList(fragment_meetingsuccess.ARG_PASSTHROUGH,pass);
+                    NavHostFragment.findNavController(fragment_second.this)
+                            .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess,bundle);
+                });
+                break;
+            case ACTION_CONFMEETING:
+                goToSuccess.setOnClickListener(view -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(fragment_meetingconfirmed.ARG_RECTANGLES,getSelectedItems());
+                    bundle.putStringArrayList(fragment_meetingconfirmed.ARG_PASSTHROUGH,pass);
+                    NavHostFragment.findNavController(fragment_second.this)
+                            .navigate(R.id.action_SecondFragment_to_fragment_meetingconfirmed,bundle);
+                });
+                break;
         }
 
         return v;

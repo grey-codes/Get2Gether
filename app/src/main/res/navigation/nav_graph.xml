@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_fragment_meetingsuccess"
             app:destination="@id/fragment_meetingsuccess" />
+        <action
+            android:id="@+id/action_SecondFragment_to_fragment_meetingconfirmed"
+            app:destination="@id/fragment_meetingconfirmed" />
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
@@ -44,9 +47,6 @@
     <action
         android:id="@+id/action_goHome"
         app:destination="@id/FirstFragment" />
-    <action
-        android:id="@+id/goToSecondFrag"
-        app:destination="@id/SecondFragment" />
     <fragment
         android:id="@+id/mySettingsFragment"
         android:name="com.get2gether.MySettingsFragment"
@@ -59,7 +59,11 @@
         android:id="@+id/ViewMeetingFragment"
         android:name="com.get2gether.ViewMeetingFragment"
         android:label="fragment_view_meeting"
-        tools:layout="@layout/fragment_view_meeting" />
+        tools:layout="@layout/fragment_view_meeting" >
+        <action
+            android:id="@+id/action_ViewMeetingFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
     <action android:id="@+id/action_global_viewMeetingFragment" app:destination="@id/ViewMeetingFragment" />
     <fragment
         android:id="@+id/fragment_makemeeting"

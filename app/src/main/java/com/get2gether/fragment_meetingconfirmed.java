@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -19,12 +24,12 @@ import android.widget.Button;
 public class fragment_meetingconfirmed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final String ARG_RECTANGLES = "rectangles";
+    public static final String ARG_PASSTHROUGH = fragment_second.ARG_PASSTHROUGH;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private boolean[][] rectangles;
+    private HashMap<String,String> passthrough;
 
     public fragment_meetingconfirmed() {
         // Required empty public constructor
@@ -39,11 +44,11 @@ public class fragment_meetingconfirmed extends Fragment {
      * @return A new instance of fragment fragment_meetingconfirmed.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_meetingconfirmed newInstance(String param1, String param2) {
-        fragment_meetingconfirmed fragment = new fragment_meetingconfirmed();
+    public static fragment_meetingsuccess newInstance(Serializable param1, ArrayList<String> param2) {
+        fragment_meetingsuccess fragment = new fragment_meetingsuccess();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_RECTANGLES, param1);
+        args.putSerializable(ARG_PASSTHROUGH, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,9 +56,28 @@ public class fragment_meetingconfirmed extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rectangles=null;
+        passthrough=null;
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            rectangles = (boolean[][]) getArguments().getSerializable(ARG_RECTANGLES);
+            ArrayList<String> pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
+
+            passthrough=new HashMap<>();
+            String key,value;
+            key=null;
+            value=null;
+            for (String s: pass) {
+                if (key==null) {
+                    key = s;
+                }
+                else if (value==null) {
+                    value=s;
+                    System.out.println(key+"||"+value);
+                    passthrough.put(key,value);
+                    key=null;
+                    value=null;
+                }
+            }
         }
     }
 
@@ -62,15 +86,13 @@ public class fragment_meetingconfirmed extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_meetingconfirmed, container, false);
 
+        TextView bodyText = v.findViewById(R.id.meetingConfirmBodyText);
+        //TODO: convert time string into bool array, then AND with rectangles array, then find first time and use that
+        bodyText.setText(getString(R.string.meetingConfirmBody, passthrough.get("name"), passthrough.get("time"), passthrough.get("day"), passthrough.get("month"), passthrough.get("year")));
 
         Button goToMainPage = v.findViewById(R.id.goToMainPage);
-        goToMainPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(fragment_meetingconfirmed.this)
-                        .navigate(R.id.action_fragment_meetingsuccess_to_FirstFragment);
-            }
-        });
+        goToMainPage.setOnClickListener(view -> NavHostFragment.findNavController(fragment_meetingconfirmed.this)
+                .navigate(R.id.action_fragment_meetingconfirmed_to_FirstFragment));
 
         return v;
     }

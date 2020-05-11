@@ -1,5 +1,6 @@
 package com.get2gether;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Meeting {
@@ -8,13 +9,23 @@ public class Meeting {
     private String owner;
     private String title;
     private String timeString;
+    private ArrayList<String> participants;
 
-    public Meeting(int id, Date date, String owner, String title, String timeString) {
+    public Meeting(int id, Date date, String owner, String title, String timeString, ArrayList<String> participants) {
         this.id = id;
         this.date = date;
         this.owner = owner;
         this.title = title;
         this.timeString = timeString;
+        this.participants = participants;
+    }
+
+    public ArrayList<String> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(ArrayList<String> participants) {
+        this.participants = participants;
     }
 
     public int getId() {
