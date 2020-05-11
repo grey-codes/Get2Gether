@@ -3,10 +3,12 @@ package com.get2gether;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -59,6 +61,18 @@ public class fragment_meetingsuccess extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meetingsuccess, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_meetingsuccess, container, false);
+
+        Button goToMainPage = v.findViewById(R.id.goToMainPage);
+        goToMainPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(fragment_meetingsuccess.this)
+                        .navigate(R.id.action_fragment_meetingsuccess_to_FirstFragment);
+            }
+        });
+
+        return v;
     }
 }

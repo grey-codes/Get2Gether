@@ -22,7 +22,7 @@
     </androidx.gridlayout.widget.GridLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/goToSuccess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/fab_margin"
