@@ -30,7 +30,7 @@
             android:layout_width="346dp"
             android:layout_height="178dp"
             android:layout_marginTop="96dp"
-            android:text="Meeting INTSERTNAME has been created successfully and your participants have been notified."
+            android:text="@string/meeting_succ"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"

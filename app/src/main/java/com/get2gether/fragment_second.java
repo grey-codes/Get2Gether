@@ -1,10 +1,7 @@
 package com.get2gether;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
@@ -18,6 +15,8 @@ import android.widget.Button;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,13 +26,18 @@ import androidx.navigation.fragment.NavHostFragment;
 public class fragment_second extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final String ARG_ACTION = "action";
+    public static final String ARG_PASSTHROUGH = "pass";
+
+    public static final int ACTION_DEFAULT = 0;
+    public static final int ACTION_MAKEMEETING = 1;
+
+
     private InteractiveRectangle[][] rectangles = new InteractiveRectangle[14][5];
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int action;
+    private ArrayList<String> pass;
 
     public fragment_second() {
         // Required empty public constructor
@@ -48,11 +52,11 @@ public class fragment_second extends Fragment {
      * @return A new instance of fragment fragment_second.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_second newInstance(String param1, String param2) {
+    public static fragment_second newInstance(int param1, ArrayList<String> param2) {
         fragment_second fragment = new fragment_second();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_ACTION, param1);
+        args.putStringArrayList(ARG_PASSTHROUGH, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +65,8 @@ public class fragment_second extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            action = getArguments().getInt(ARG_ACTION);
+            pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
         }
     }
 
@@ -184,13 +188,16 @@ public class fragment_second extends Fragment {
         });
 
         Button goToSuccess = v.findViewById(R.id.goToSuccess);
-        goToSuccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        if (action==ACTION_MAKEMEETING) {
+            goToSuccess.setOnClickListener(view -> {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(fragment_meetingsuccess.ARG_RECTANGLES,getSelectedItems());
+                bundle.putStringArrayList(fragment_meetingsuccess.ARG_PASSTHROUGH,pass);
                 NavHostFragment.findNavController(fragment_second.this)
-                        .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess);
-            }
-        });
+                        .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess,bundle);
+            });
+        }
 
         return v;
     }

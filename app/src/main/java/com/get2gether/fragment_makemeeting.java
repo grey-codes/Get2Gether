@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -117,17 +119,32 @@ public class fragment_makemeeting extends Fragment {
                 TextView textViewMeeting = view.getRootView().findViewById(R.id.projectName);
                 TextView textViewParticipants = view.getRootView().findViewById(R.id.participants);
 
-                //String dayValue = spinnerDay.getSelectedItem().toString();
-                //String monthValue = spinnerMonth.getSelectedItem().toString();
-                //String yearValue = spinnerYear.getSelectedItem().toString();
-                //String meetingName = textViewMeeting.getText().toString();
-                //String participants = textViewParticipants.getText().toString();
+                String dayValue = spinnerDay.getSelectedItem().toString();
+                String monthValue = spinnerMonth.getSelectedItem().toString();
+                String yearValue = spinnerYear.getSelectedItem().toString();
+                String meetingName = textViewMeeting.getText().toString();
+                String participants = textViewParticipants.getText().toString();
+
+                ArrayList<String> al = new ArrayList<>();
+                al.add("day");
+                al.add(dayValue);
+                al.add("month");
+                al.add(monthValue);
+                al.add("year");
+                al.add(yearValue);
+                al.add("name");
+                al.add(meetingName);
+                al.add("participants");
+                al.add(participants);
 
 
+                Bundle bundle = new Bundle();
+                bundle.putInt(fragment_second.ARG_ACTION,fragment_second.ACTION_MAKEMEETING);
+                bundle.putStringArrayList(fragment_second.ARG_PASSTHROUGH,al);
 
 
                 NavHostFragment.findNavController(fragment_makemeeting.this)
-                        .navigate(R.id.makeMeetingToTimes);
+                        .navigate(R.id.makeMeetingToTimes,bundle);
             }
         });
 
