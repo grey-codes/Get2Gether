@@ -79,4 +79,13 @@
             android:id="@+id/action_fragment_meetingsuccess_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_meetingconfirmed"
+        android:name="com.get2gether.fragment_meetingconfirmed"
+        android:label="fragment_meetingconfirmed"
+        tools:layout="@layout/fragment_meetingconfirmed" >
+        <action
+            android:id="@+id/action_fragment_meetingconfirmed_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>
