@@ -64,6 +64,19 @@ public class fragment_second extends Fragment {
         }
     }
 
+    public boolean[][] getSelectedItems() {
+        int rows, cols;
+        rows = this.rectangles.length;
+        cols = this.rectangles[0].length;
+        boolean[][] res = new boolean[rows][cols];
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<cols; j++) {
+                res[i][j] = rectangles[i][j].getSelected();
+            }
+        }
+        return res;
+    }
+
     boolean status;
 
     @Override
