@@ -57,16 +57,7 @@ public class ViewMeetingFragment extends Fragment {
 
         parentActivity.meetingNetwork.getMeetings(meetings -> {
             meetingList = meetings;
-
-            parentActivity.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-
-                    populateMeetings(ctx, view);
-
-                }
-            });
+            parentActivity.runOnUiThread(() -> populateMeetings(ctx, view));
         });
     }
 
@@ -78,7 +69,9 @@ public class ViewMeetingFragment extends Fragment {
 
             System.out.print("Accepting: ");
             System.out.println(m.getTitle());
-            //TODO: Pipe stuff to web
+
+            parentActivity.meetingNetwork.createMeeting(m);
+
             meetingList.remove(position);
             recyclerView.removeViewAt(position);
             mAdapter.notifyItemRemoved(position);
@@ -92,9 +85,13 @@ public class ViewMeetingFragment extends Fragment {
                     .navigate(R.id.action_ViewMeetingFragment_to_SecondFragment,bundle);
         });
         mAdapter.setDcListener( (declineButton, position) -> {
+            Meeting m = meetingList.get(position);
+
             System.out.print("Declining: ");
-            System.out.println(meetingList.get(position).getTitle());
-            //TODO: Pipe stuff to web
+            System.out.println(m.getTitle());
+
+            parentActivity.meetingNetwork.deleteMeeting(m);
+
             meetingList.remove(position);
             recyclerView.removeViewAt(position);
             mAdapter.notifyItemRemoved(position);
