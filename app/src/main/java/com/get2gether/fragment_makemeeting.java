@@ -1,7 +1,6 @@
 package com.get2gether;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,9 +87,6 @@ public class fragment_makemeeting extends Fragment {
         for (int i = 2020; i <= 2030; i++) {
             yearCategories[i - 2020] = "" + i;
         }
-
-
-        Log.println(Log.ERROR,"ASDF","FUCK YOU INITIALIZE ME");
 
         Spinner spinnerMonth = v.findViewById(R.id.spinnerMonth);
         ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(getContext(),

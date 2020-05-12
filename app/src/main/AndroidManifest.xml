@@ -39,7 +39,7 @@
             android:name=".data.NotificationContentProvider"
             android:authorities="com.get2gether.data"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
     </application>
 
 </manifest>
