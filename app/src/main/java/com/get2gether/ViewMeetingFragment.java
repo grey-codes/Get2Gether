@@ -1,11 +1,16 @@
 package com.get2gether;
 
+import android.app.Activity;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -50,8 +55,7 @@ public class ViewMeetingFragment extends Fragment {
         }
 
         meetingList = new ArrayList<>();
-        meetingList.add(new Meeting(0, targetDate, "Grey Ruessler", "Fuck you", "14:00-19:00", participantList));
-        meetingList.add(new Meeting(1, targetDate, "Garry Russel", "Fuck you too", "14:00-19:00", participantList));
+        meetingList.add(new Meeting(0,targetDate,"Steven Eldridge","CS533 Group Project","7:15-8:45, 10:00-11:30, 14:30-17:15", participantList));
 
 
         populateMeetings(ctx, view);

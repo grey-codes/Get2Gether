@@ -15,106 +15,119 @@
 
         <Button
             android:id="@+id/goToSecondFrag"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="65dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="52dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
             android:padding="@dimen/fab_margin"
             android:text="@string/next"
-            android:textColor="#ffffff"
 
+            android:textColor="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/projectName"
-            android:layout_width="375dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="347dp"
+            android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
             android:text="Name your meeting"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="347dp"
+            android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="392dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
             android:text="Add Participants"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerDay" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="347dp"
+            android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
             android:text="Select a date"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toTopOf="@+id/spinnerDay"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/projectName" />
 
         <Spinner
             android:id="@+id/spinnerMonth"
             android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="288dp"
             android:dropDownWidth="150dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/spinnerDay" />
 
         <Spinner
             android:id="@+id/spinnerDay"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="46dp"
-            android:layout_marginTop="288dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:dropDownWidth="80dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerYear"
             app:layout_constraintStart_toEndOf="@+id/spinnerMonth"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Spinner
             android:id="@+id/spinnerYear"
             android:layout_width="120dp"
             android:layout_height="46dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="288dp"
+            android:layout_marginEnd="16dp"
             android:dropDownWidth="110dp"
-            app:layout_constraintStart_toEndOf="@+id/spinnerDay"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinnerDay" />
 
         <EditText
             android:id="@+id/participants"
-            android:layout_width="375dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Email addresses separated by commas"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
-            android:maxLines="5"
-            android:inputType="textMultiLine"
             android:gravity="bottom"
+            android:hint="Email addresses separated by commas"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
             android:singleLine="false"
+            app:layout_constraintBottom_toTopOf="@+id/goToSecondFrag"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.01999998" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -25,7 +25,6 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
         PendingIntent alarmIntent = getStartPendingIntent(context);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() +
                         5 * 1000,5*1000,               alarmIntent);
-        System.out.println("take me out to the back of the shed, shoot me in the back of the head");
     }
 
     @Override
@@ -42,15 +41,15 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
             Log.i(getClass().getSimpleName(), "onReceive from alarm, starting notification service");
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "AAAAA")
                     .setSmallIcon(R.drawable.ic_android_black_24dp)
-                    .setContentTitle("My notification")
-                    .setContentText("Much longer text that cannot fit one line...")
+                    .setContentTitle("Confirmed Meeting")
+                    .setContentText("\"CS533 Group Project\" has a meeting time at 15:30-16:30")
                     .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Much longer text that cannot fit one line..."))
+                            .bigText("\"CS533 Group Project\" has a meeting time at 15:30-16:30"))
                     .setContentIntent(pendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            notificationManager.notify(notificationId++, builder.build());
+            //notificationManager.notify(notificationId++, builder.build());
         } else if (ACTION_DELETE_NOTIFICATION.equals(action)) {
             Log.i(getClass().getSimpleName(), "onReceive delete notification action, starting notification service to handle delete");
         }
