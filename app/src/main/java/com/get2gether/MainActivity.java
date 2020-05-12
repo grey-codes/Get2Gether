@@ -138,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
     public void updateLoginUI() {
         MenuItem signOutItem = nv.getMenu().findItem(R.id.menu_sign_in_out);
         signOutItem.setTitle((googleAccount == null) ? getString(R.string.sign_in) : getString(R.string.sign_out));
+        if (googleAccount != null)
+            meetingNetwork.setGoogleAccount(googleAccount);
+        else
+            meetingNetwork.setGoogleAccount(null);
     }
 
     private void signOut() {

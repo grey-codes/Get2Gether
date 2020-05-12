@@ -31,6 +31,14 @@ class MeetingNetwork {
         this.googleAccount = acc;
     }
 
+    public GoogleSignInAccount getGoogleAccount() {
+        return googleAccount;
+    }
+
+    public void setGoogleAccount(GoogleSignInAccount googleAccount) {
+        this.googleAccount = googleAccount;
+    }
+
     void acceptMeeting(Meeting m) {
         executorService.execute(new AcceptMeetingRunnable(m));
     }
