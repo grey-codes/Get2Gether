@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.util.ArrayList;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +23,7 @@ public class fragment_second extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_ACTION = "action";
-    public static final String ARG_PASSTHROUGH = "pass";
+    public static final String ARG_MEETING = "meeting";
 
     public static final int ACTION_DEFAULT = 0;
     public static final int ACTION_MAKEMEETING = 1;
@@ -39,7 +37,7 @@ public class fragment_second extends Fragment {
 
     // TODO: Rename and change types of parameters
     private int action;
-    private ArrayList<String> pass;
+    private Meeting meeting;
 
     public fragment_second() {
         // Required empty public constructor
@@ -54,11 +52,11 @@ public class fragment_second extends Fragment {
      * @return A new instance of fragment fragment_second.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_second newInstance(int param1, ArrayList<String> param2) {
+    public static fragment_second newInstance(int param1, Meeting param2) {
         fragment_second fragment = new fragment_second();
         Bundle args = new Bundle();
         args.putInt(ARG_ACTION, param1);
-        args.putStringArrayList(ARG_PASSTHROUGH, param2);
+        args.putSerializable(ARG_MEETING, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +66,7 @@ public class fragment_second extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             action = getArguments().getInt(ARG_ACTION);
-            pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
+            meeting = (Meeting) getArguments().getSerializable(ARG_MEETING);
         }
     }
 
@@ -193,9 +191,10 @@ public class fragment_second extends Fragment {
         switch(action) {
             case ACTION_MAKEMEETING:
                 goToSuccess.setOnClickListener(view -> {
+                    meeting.setTimeGrid(getSelectedItems());
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(fragment_meetingsuccess.ARG_RECTANGLES,getSelectedItems());
-                    bundle.putStringArrayList(fragment_meetingsuccess.ARG_PASSTHROUGH,pass);
+                    bundle.putSerializable(fragment_meetingsuccess.ARG_MEETING, meeting);
                     NavHostFragment.findNavController(fragment_second.this)
                             .navigate(R.id.action_SecondFragment_to_fragment_meetingsuccess,bundle);
                 });
@@ -204,7 +203,7 @@ public class fragment_second extends Fragment {
                 goToSuccess.setOnClickListener(view -> {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(fragment_meetingconfirmed.ARG_RECTANGLES,getSelectedItems());
-                    bundle.putStringArrayList(fragment_meetingconfirmed.ARG_PASSTHROUGH,pass);
+                    bundle.putSerializable(fragment_meetingconfirmed.ARG_MEETING, meeting);
                     NavHostFragment.findNavController(fragment_second.this)
                             .navigate(R.id.action_SecondFragment_to_fragment_meetingconfirmed,bundle);
                 });

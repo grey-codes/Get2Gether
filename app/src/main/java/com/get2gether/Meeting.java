@@ -7,12 +7,16 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Meeting {
+public class Meeting implements java.io.Serializable {
     public static final int GRID_ROWS = 14; //starting at 6
     public static final int GRID_COLUMNS = 5; //blank,15,30,45,60
     public static final int GRID_STARTING_HOUR = 6;
 
+    public static final int STATUS_UNCOMFIRMED = 0;
+    public static final int STATUS_CONFIRMED = 1;
+
     private int id;
+    private int status;
     private java.util.Date date;
     private String owner;
     private String title;
@@ -46,6 +50,25 @@ public class Meeting {
         this.participants = participants;
     }
 
+    public static double timeToDouble(String t) {
+        List<String> CSV = Arrays.asList(t.split(":"));
+        String hour = CSV.get(0).trim();
+        String minutes = "0";
+        if (CSV.size() > 1) {
+            minutes = CSV.get(1).trim();
+        }
+        try {
+            Double.parseDouble(hour);
+        } catch (Exception e) {
+            return GRID_STARTING_HOUR;
+        }
+        return Double.parseDouble(hour) + Double.parseDouble(minutes) / 60;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
     public int getId() {
         return id;
     }
@@ -65,6 +88,18 @@ public class Meeting {
         ar[1] = ld.getMonthValue();
         ar[2] = ld.getYear();
         return ar;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDay() {
+        return Integer.toString(getDateArray()[0]);
+    }
+
+    public String getMonth() {
+        return Integer.toString(getDateArray()[1]);
     }
 
     public void setDate(Date date) {
@@ -97,14 +132,8 @@ public class Meeting {
         }
     }
 
-    public static double timeToDouble(String t) {
-        List<String> CSV = Arrays.asList(t.split(":"));
-        String hour = CSV.get(0).trim();
-        String minutes = "0";
-        if (CSV.size() > 1) {
-            minutes = CSV.get(1).trim();
-        }
-        return Double.parseDouble(hour) + Double.parseDouble(minutes) / 60;
+    public String getYear() {
+        return Integer.toString(getDateArray()[2]);
     }
 
     public static boolean[][] stringToGrid(String str, int startingHour) {

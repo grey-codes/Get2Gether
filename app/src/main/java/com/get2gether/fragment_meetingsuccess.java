@@ -12,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -24,11 +23,11 @@ public class fragment_meetingsuccess extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_RECTANGLES = "rectangles";
-    public static final String ARG_PASSTHROUGH = fragment_second.ARG_PASSTHROUGH;
+    public static final String ARG_MEETING = fragment_second.ARG_MEETING;
 
     // TODO: Rename and change types of parameters
     private boolean[][] rectangles;
-    private HashMap<String,String> passthrough;
+    private Meeting meeting;
 
     public fragment_meetingsuccess() {
         // Required empty public constructor
@@ -47,7 +46,7 @@ public class fragment_meetingsuccess extends Fragment {
         fragment_meetingsuccess fragment = new fragment_meetingsuccess();
         Bundle args = new Bundle();
         args.putSerializable(ARG_RECTANGLES, param1);
-        args.putSerializable(ARG_PASSTHROUGH, param2);
+        args.putSerializable(ARG_MEETING, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,27 +55,10 @@ public class fragment_meetingsuccess extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rectangles=null;
-        passthrough=null;
+        meeting = null;
         if (getArguments() != null) {
             rectangles = (boolean[][]) getArguments().getSerializable(ARG_RECTANGLES);
-            ArrayList<String> pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
-
-            passthrough=new HashMap<>();
-            String key,value;
-            key=null;
-            value=null;
-            for (String s: pass) {
-                if (key==null) {
-                    key = s;
-                }
-                else if (value==null) {
-                    value=s;
-                    System.out.println(key+"||"+value);
-                    passthrough.put(key,value);
-                    key=null;
-                    value=null;
-                }
-            }
+            meeting = (Meeting) getArguments().getSerializable(ARG_MEETING);
         }
     }
 
@@ -96,9 +78,8 @@ public class fragment_meetingsuccess extends Fragment {
             }
         });
 
-        if (passthrough!=null) {
-            if (passthrough.containsKey("name"));
-            String title = passthrough.get("name");
+        if (meeting != null) {
+            String title = meeting.getTitle();
             TextView tv = v.findViewById(R.id.textView4);
             tv.setText(getString(R.string.meeting_succ,title));
         }

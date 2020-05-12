@@ -1,10 +1,6 @@
 package com.get2gether;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +10,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 
 /**
@@ -23,6 +24,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class fragment_makemeeting extends Fragment {
+    private MainActivity parentActivity;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -90,25 +92,27 @@ public class fragment_makemeeting extends Fragment {
 
         Log.println(Log.ERROR,"ASDF","FUCK YOU INITIALIZE ME");
 
-        Spinner spinnerMonth = (Spinner) v.findViewById(R.id.spinnerMonth);
+        Spinner spinnerMonth = v.findViewById(R.id.spinnerMonth);
         ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, monthCategories);
         adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(adapterMonth);
 
-        Spinner spinnerDay = (Spinner) v.findViewById(R.id.spinnerDay);
+        Spinner spinnerDay = v.findViewById(R.id.spinnerDay);
         ArrayAdapter<String> adapterDay = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, dayCategories);
         adapterDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDay.setAdapter(adapterDay);
 
-        Spinner spinnerYear = (Spinner) v.findViewById(R.id.spinnerYear);
+        Spinner spinnerYear = v.findViewById(R.id.spinnerYear);
         ArrayAdapter<String> adapterYear = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, yearCategories);
         adapterYear.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerYear.setAdapter(adapterYear);
 
         Button goToSecondFrag = v.findViewById(R.id.goToSecondFrag);
+
+        parentActivity = (MainActivity) getActivity();
 
         goToSecondFrag.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,22 +129,15 @@ public class fragment_makemeeting extends Fragment {
                 String meetingName = textViewMeeting.getText().toString();
                 String participants = textViewParticipants.getText().toString();
 
-                ArrayList<String> al = new ArrayList<>();
-                al.add("day");
-                al.add(dayValue);
-                al.add("month");
-                al.add(monthValue);
-                al.add("year");
-                al.add(yearValue);
-                al.add("name");
-                al.add(meetingName);
-                al.add("participants");
-                al.add(participants);
 
+                ArrayList<String> partList = new ArrayList<String>(Arrays.asList(participants.split(",")));
+                Date d = new Date();
+
+                Meeting m = new Meeting(-1, d, parentActivity.googleAccount.getDisplayName(), textViewMeeting.getText().toString(), "", partList);
 
                 Bundle bundle = new Bundle();
                 bundle.putInt(fragment_second.ARG_ACTION,fragment_second.ACTION_MAKEMEETING);
-                bundle.putStringArrayList(fragment_second.ARG_PASSTHROUGH,al);
+                bundle.putSerializable(fragment_second.ARG_MEETING, m);
 
 
                 NavHostFragment.findNavController(fragment_makemeeting.this)

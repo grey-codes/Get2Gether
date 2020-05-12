@@ -12,8 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 
 /**
@@ -25,11 +23,11 @@ public class fragment_meetingconfirmed extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_RECTANGLES = "rectangles";
-    public static final String ARG_PASSTHROUGH = fragment_second.ARG_PASSTHROUGH;
+    public static final String ARG_MEETING = fragment_second.ARG_MEETING;
 
     // TODO: Rename and change types of parameters
     private boolean[][] rectangles;
-    private HashMap<String,String> passthrough;
+    private Meeting meeting;
 
     public fragment_meetingconfirmed() {
         // Required empty public constructor
@@ -48,7 +46,7 @@ public class fragment_meetingconfirmed extends Fragment {
         fragment_meetingsuccess fragment = new fragment_meetingsuccess();
         Bundle args = new Bundle();
         args.putSerializable(ARG_RECTANGLES, param1);
-        args.putSerializable(ARG_PASSTHROUGH, param2);
+        args.putSerializable(ARG_MEETING, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,27 +55,10 @@ public class fragment_meetingconfirmed extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rectangles=null;
-        passthrough=null;
+        meeting = null;
         if (getArguments() != null) {
             rectangles = (boolean[][]) getArguments().getSerializable(ARG_RECTANGLES);
-            ArrayList<String> pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
-
-            passthrough=new HashMap<>();
-            String key,value;
-            key=null;
-            value=null;
-            for (String s: pass) {
-                if (key==null) {
-                    key = s;
-                }
-                else if (value==null) {
-                    value=s;
-                    System.out.println(key+"||"+value);
-                    passthrough.put(key,value);
-                    key=null;
-                    value=null;
-                }
-            }
+            meeting = (Meeting) getArguments().getSerializable(ARG_MEETING);
         }
     }
 
@@ -88,9 +69,8 @@ public class fragment_meetingconfirmed extends Fragment {
 
         TextView bodyText = v.findViewById(R.id.meetingConfirmBodyText);
         //TODO: convert time string into bool array, then AND with rectangles array, then find first time and use that
-        Meeting m = new Meeting(-1, new Date(), "blank", "blank", passthrough.get("time"), new ArrayList<String>());
-        m.updateIdealTime(rectangles, 4);
-        bodyText.setText(getString(R.string.meetingConfirmBody, passthrough.get("name"), m.getIdealTime(), passthrough.get("day"), passthrough.get("month"), passthrough.get("year")));
+        meeting.updateIdealTime(rectangles, 4);
+        bodyText.setText(getString(R.string.meetingConfirmBody, meeting.getTitle(), meeting.getIdealTime(), meeting.getDay(), meeting.getMonth(), meeting.getYear()));
 
         Button goToMainPage = v.findViewById(R.id.goToMainPage);
         goToMainPage.setOnClickListener(view -> NavHostFragment.findNavController(fragment_meetingconfirmed.this)
