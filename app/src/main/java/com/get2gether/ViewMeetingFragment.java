@@ -55,8 +55,6 @@ public class ViewMeetingFragment extends Fragment {
             System.out.print("Accepting: ");
             System.out.println(m.getTitle());
 
-            parentActivity.meetingNetwork.acceptMeeting(m);
-
             meetingList.remove(position);
             recyclerView.removeViewAt(position);
             mAdapter.notifyItemRemoved(position);

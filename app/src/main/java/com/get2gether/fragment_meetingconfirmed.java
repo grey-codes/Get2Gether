@@ -69,6 +69,9 @@ public class fragment_meetingconfirmed extends Fragment {
 
         TextView bodyText = v.findViewById(R.id.meetingConfirmBodyText);
         //TODO: convert time string into bool array, then AND with rectangles array, then find first time and use that
+        MainActivity parentActivity = (MainActivity) getActivity();
+        parentActivity.meetingNetwork.acceptMeeting(meeting);
+
         meeting.updateIdealTime(rectangles, 4);
         bodyText.setText(getString(R.string.meetingConfirmBody, meeting.getTitle(), meeting.getIdealTime(), meeting.getDay(), meeting.getMonth(), meeting.getYear()));
 
