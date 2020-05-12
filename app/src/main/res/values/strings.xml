@@ -17,13 +17,15 @@
     <string name="Open">Open</string>
     <string name="Close">Close</string>
     <string name="app_icon">App Icon</string>
+    <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="login_fragment_label">Log In</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="view_meetings">View Meetings</string>
-    <string name="meeting_succ">Meeting %s has been created successfully and your participants have been notified.</string>
-    <string name="meetingConfirmBody">Meeting %s has been set up at %s on %s/%s/%s.</string>
+    <string name="meeting_succ">Meeting "%s" has been created successfully and your participants have been notified.</string>
+    <string name="meetingConfirmBody">Meeting "%s" has been set up at %s on %s/%s/%s.</string>
     <string name="meeting_confirmed">Meeting Confirmed!</string>
+    <string name="schedule_meeting">Schedule Meeting</string>
 </resources>

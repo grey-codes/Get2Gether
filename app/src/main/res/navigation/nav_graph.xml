@@ -92,4 +92,7 @@
             android:id="@+id/action_fragment_meetingconfirmed_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <action
+        android:id="@+id/action_global_fragment_makemeeting"
+        app:destination="@id/fragment_makemeeting" />
 </navigation>

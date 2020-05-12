@@ -51,15 +51,18 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.goToMakeMeeting);
             }
         });
+
         updateLoginUI();
     }
 
     private void updateLoginUI() {
         if (parentActivity.googleAccount == null) {
             welcomeText.setVisibility(View.INVISIBLE);
+            goToSecondFrag.setVisibility(View.INVISIBLE);
             loginButton.setVisibility(View.VISIBLE);
         } else {
             welcomeText.setVisibility(View.VISIBLE);
+            goToSecondFrag.setVisibility(View.VISIBLE);
             loginButton.setVisibility(View.INVISIBLE);
             welcomeText.setText(getString(R.string.welcome, parentActivity.googleAccount.getDisplayName()));
         }

@@ -1,15 +1,14 @@
 package com.get2gether;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -139,7 +138,7 @@ public class fragment_meetingsuccess extends Fragment {
         }
 
         //Removes the extra comma at the end of the time string
-        time = time.substring(0, time.length() - 2);
+        time = time.substring(0, Math.max(time.length() - 2, 0));
 
         return time;
     }
@@ -197,7 +196,7 @@ public class fragment_meetingsuccess extends Fragment {
         }
 
         //Removes the extra comma at the end of the time string
-        time = time.substring(0, time.length() - 2);
+        time = time.substring(0, Math.max(time.length() - 2, 0));
 
         return time;
     }

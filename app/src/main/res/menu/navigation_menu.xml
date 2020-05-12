@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/schedule_meeting"
+        android:icon="@drawable/ic_schedule_black_24dp"
+        android:title="@string/schedule_meeting" />
+    <item
         android:id="@+id/view_meetings"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/view_meetings" />
     <item
-        android:id="@+id/account"
-        android:icon="@drawable/ic_android_black_24dp"
-        android:title="@string/my_account" />
-    <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/settings" />
     <item
-        android:id="@+id/menu_sign_out"
-        android:icon="@drawable/ic_android_black_24dp"
+        android:id="@+id/menu_sign_in_out"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="@string/sign_out" />
 </menu>

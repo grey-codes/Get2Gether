@@ -3,7 +3,6 @@ package com.get2gether;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -84,21 +83,32 @@ public class MainActivity extends AppCompatActivity {
 
 
         nv.setNavigationItemSelectedListener(item -> {
+            Toast signInToast = Toast.makeText(this.getBaseContext(), "Please sign in!", Toast.LENGTH_LONG);
             int id = item.getItemId();
             switch (id) {
-                case R.id.account:
-                    Toast.makeText(MainActivity.this, "My Account", Toast.LENGTH_SHORT).show();
+                case R.id.schedule_meeting:
+                    if (googleAccount != null)
+                        Navigation.findNavController(fcv).navigate(R.id.action_global_fragment_makemeeting);
+                    else
+                        signInToast.show();
+                    dl.closeDrawers();
                     break;
                 case R.id.view_meetings:
-                    Navigation.findNavController(fcv).navigate(R.id.action_global_viewMeetingFragment);
+                    if (googleAccount != null)
+                        Navigation.findNavController(fcv).navigate(R.id.action_global_viewMeetingFragment);
+                    else
+                        signInToast.show();
                     dl.closeDrawers();
                     break;
                 case R.id.settings:
-                   Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
+                    Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
                     dl.closeDrawers();
                     break;
-                case R.id.menu_sign_out:
-                    signOut();
+                case R.id.menu_sign_in_out:
+                    if (googleAccount != null)
+                        signOut();
+                    else
+                        Navigation.findNavController(fcv).navigate(R.id.prompt_Login);
                     dl.closeDrawers();
                     break;
                 default:
@@ -113,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         int act = getIntent().getIntExtra("act",ACTION_NONE);
         switch (act) {
             case ACTION_VIEW_MEETINGS:
-                Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
+                Navigation.findNavController(fcv).navigate(R.id.action_global_viewMeetingFragment);
                 break;
             default:
                 break;
@@ -123,9 +133,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateLoginUI() {
-        MenuItem signOutItem = nv.getMenu().findItem(R.id.menu_sign_out);
-        signOutItem.setVisible(googleAccount != null);
-
+        MenuItem signOutItem = nv.getMenu().findItem(R.id.menu_sign_in_out);
+        signOutItem.setTitle((googleAccount == null) ? getString(R.string.sign_in) : getString(R.string.sign_out));
     }
 
     private void signOut() {
@@ -148,9 +157,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (t.onOptionsItemSelected(item))
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Navigation.findNavController(fcv).navigate(R.id.action_global_mySettingsFragment);
+                return true;
 
-        return super.onOptionsItemSelected(item);
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
