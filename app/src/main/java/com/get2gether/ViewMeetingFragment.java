@@ -70,7 +70,7 @@ public class ViewMeetingFragment extends Fragment {
             System.out.print("Accepting: ");
             System.out.println(m.getTitle());
 
-            parentActivity.meetingNetwork.createMeeting(m);
+            parentActivity.meetingNetwork.acceptMeeting(m);
 
             meetingList.remove(position);
             recyclerView.removeViewAt(position);
@@ -90,7 +90,7 @@ public class ViewMeetingFragment extends Fragment {
             System.out.print("Declining: ");
             System.out.println(m.getTitle());
 
-            parentActivity.meetingNetwork.deleteMeeting(m);
+            parentActivity.meetingNetwork.declineMeeting(m);
 
             meetingList.remove(position);
             recyclerView.removeViewAt(position);

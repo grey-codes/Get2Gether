@@ -19,7 +19,8 @@ import java.util.concurrent.Executors;
 
 class MeetingNetwork {
     private static final String newEndpoint = "https://greycodes.net/lab/get2gether/createmeeting.php";
-    private static final String delEndpoint = "https://greycodes.net/lab/get2gether/deletemeeting.php";
+    private static final String accEndpoint = "https://greycodes.net/lab/get2gether/acceptmeeting.php";
+    private static final String decEndpoint = "https://greycodes.net/lab/get2gether/declinemeeting.php";
     private static final String retrieveEndpoint = "https://greycodes.net/lab/get2gether/getmeetings.php";
     private static final int DEFAULT_THREAD_POOL_SIZE = 10;
     private ExecutorService executorService = Executors.newFixedThreadPool(DEFAULT_THREAD_POOL_SIZE);
@@ -30,16 +31,73 @@ class MeetingNetwork {
         this.googleAccount = acc;
     }
 
+    void acceptMeeting(Meeting m) {
+        executorService.execute(new AcceptMeetingRunnable(m));
+    }
+
     void createMeeting(Meeting m) {
         executorService.execute(new CreateMeetingRunnable(m));
     }
 
-    void deleteMeeting(Meeting m) {
+    void declineMeeting(Meeting m) {
         executorService.execute(new DeleteMeetingRunnable(m));
     }
 
     void getMeetings(MeetingListListener cb) {
         executorService.execute(new GetMeetingsRunnable(cb));
+    }
+
+    class AcceptMeetingRunnable implements Runnable {
+        Meeting meeting;
+
+        AcceptMeetingRunnable(Meeting m) {
+            meeting = m;
+        }
+
+        @Override
+        public void run() {
+            try {
+                HashMap<String, String> hm = new HashMap<>();
+                hm.put("google_id", googleAccount.getId());
+                hm.put("google_token", googleAccount.getServerAuthCode());
+                hm.put("meeting_json", gson.toJson(meeting));
+
+                String jsonToPost = gson.toJson(hm);
+
+                URL url = new URL(accEndpoint);
+                System.out.println(jsonToPost);
+                System.out.println(googleAccount.getEmail());
+
+                HttpURLConnection dc = (HttpURLConnection) url.openConnection();
+
+                dc.setRequestMethod("POST");
+                dc.setRequestProperty("Content-Type", "application/json; utf-8");
+                dc.setRequestProperty("Accept", "application/json");
+
+                dc.setConnectTimeout(5000);
+                dc.setReadTimeout(5000);
+                dc.setDoOutput(true);
+
+                try (OutputStream os = dc.getOutputStream()) {
+                    byte[] input = jsonToPost.getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                }
+
+                BufferedReader r = new BufferedReader(new InputStreamReader(dc.getInputStream()));
+                StringBuilder total = new StringBuilder();
+                for (String line; (line = r.readLine()) != null; ) {
+                    total.append(line).append('\n');
+                }
+                r.close();
+                String json = total.toString();
+
+                System.out.println("JSON: " + json);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     class CreateMeetingRunnable implements Runnable {
@@ -112,7 +170,7 @@ class MeetingNetwork {
 
                 String jsonToPost = gson.toJson(hm);
 
-                URL url = new URL(delEndpoint);
+                URL url = new URL(decEndpoint);
                 System.out.println(jsonToPost);
                 System.out.println(googleAccount.getEmail());
 
