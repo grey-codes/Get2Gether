@@ -1,5 +1,6 @@
 package com.get2gether;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -131,7 +133,15 @@ public class fragment_makemeeting extends Fragment {
 
 
                 ArrayList<String> partList = new ArrayList<String>(Arrays.asList(participants.split(",")));
+
+                String currentDateString = String.format("%s/%s/%s", dayValue, monthValue, yearValue);
+                SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
                 Date d = new Date();
+                try {
+                    d = sd.parse(currentDateString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 Meeting m = new Meeting(-1, d, parentActivity.googleAccount.getDisplayName(), textViewMeeting.getText().toString(), "", partList);
 
