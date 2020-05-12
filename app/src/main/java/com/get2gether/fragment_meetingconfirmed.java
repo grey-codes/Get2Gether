@@ -1,18 +1,18 @@
 package com.get2gether;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -88,7 +88,9 @@ public class fragment_meetingconfirmed extends Fragment {
 
         TextView bodyText = v.findViewById(R.id.meetingConfirmBodyText);
         //TODO: convert time string into bool array, then AND with rectangles array, then find first time and use that
-        bodyText.setText(getString(R.string.meetingConfirmBody, passthrough.get("name"), passthrough.get("time"), passthrough.get("day"), passthrough.get("month"), passthrough.get("year")));
+        Meeting m = new Meeting(-1, new Date(), "blank", "blank", passthrough.get("time"), new ArrayList<String>());
+        m.updateIdealTime(rectangles, 4);
+        bodyText.setText(getString(R.string.meetingConfirmBody, passthrough.get("name"), m.getIdealTime(), passthrough.get("day"), passthrough.get("month"), passthrough.get("year")));
 
         Button goToMainPage = v.findViewById(R.id.goToMainPage);
         goToMainPage.setOnClickListener(view -> NavHostFragment.findNavController(fragment_meetingconfirmed.this)

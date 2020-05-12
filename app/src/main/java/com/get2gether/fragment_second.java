@@ -2,9 +2,6 @@ package com.get2gether;
 
 import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -32,9 +30,12 @@ public class fragment_second extends Fragment {
     public static final int ACTION_DEFAULT = 0;
     public static final int ACTION_MAKEMEETING = 1;
     public static final int ACTION_CONFMEETING = 2;
+    private static final int GRID_ROWS = Meeting.GRID_ROWS;
+    private static final int GRID_COLS = Meeting.GRID_COLUMNS;
+    private static final int GRID_HOUR = Meeting.GRID_STARTING_HOUR;
 
 
-    private InteractiveRectangle[][] rectangles = new InteractiveRectangle[14][5];
+    private InteractiveRectangle[][] rectangles = new InteractiveRectangle[GRID_ROWS][GRID_COLS];
 
     // TODO: Rename and change types of parameters
     private int action;
@@ -92,7 +93,7 @@ public class fragment_second extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_second, container, false);
 
-        GridLayout layout = (GridLayout) v.findViewById(R.id.grid);
+        GridLayout layout = v.findViewById(R.id.grid);
 
 
         ViewTreeObserver vto = layout.getViewTreeObserver();
@@ -109,7 +110,7 @@ public class fragment_second extends Fragment {
 
 
                 for (int a = 0; a < rectangles.length; a++) {
-                    rectangles[a][0] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
+                    rectangles[a][0] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / GRID_COLS, totalHeight / GRID_ROWS, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
                     rectangles[a][0].setCanBeToggled(false);
                     GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                     params.height = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -123,7 +124,7 @@ public class fragment_second extends Fragment {
 
 
                 for (int b = 1; b < rectangles[0].length; b++) {
-                    rectangles[0][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
+                    rectangles[0][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / GRID_COLS, totalHeight / GRID_ROWS, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 112, 48, 160), android.graphics.Color.argb(255, 112, 48, 160));
                     rectangles[0][b].setCanBeToggled(false);
                     GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                     params.height = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -136,7 +137,7 @@ public class fragment_second extends Fragment {
 
                 for (int a = 1; a < rectangles.length; a++) {
                     for (int b = 1; b < rectangles[a].length; b++) {
-                        rectangles[a][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / 5, totalHeight / 14, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 84, 160, 53), android.graphics.Color.argb(255, 95, 97, 110));
+                        rectangles[a][b] = new InteractiveRectangle(getContext(), 0, 0, totalWidth / GRID_COLS, totalHeight / GRID_ROWS, 4, android.graphics.Color.argb(255, 32, 34, 37), android.graphics.Color.argb(255, 84, 160, 53), android.graphics.Color.argb(255, 95, 97, 110));
                         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                         params.height = GridLayout.LayoutParams.WRAP_CONTENT;
                         params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -166,8 +167,7 @@ public class fragment_second extends Fragment {
                 rectangles[13][0].setText("6");
 
 
-
-                layout.setOnTouchListener( (View.OnTouchListener) (view, event) -> {
+                layout.setOnTouchListener((view, event) -> {
                     GridLayout layout1 = (GridLayout)view;
 
                     for(int i = 0; i< layout1.getChildCount(); i++) {

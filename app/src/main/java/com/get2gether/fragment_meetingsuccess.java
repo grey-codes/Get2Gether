@@ -60,7 +60,6 @@ public class fragment_meetingsuccess extends Fragment {
         if (getArguments() != null) {
             rectangles = (boolean[][]) getArguments().getSerializable(ARG_RECTANGLES);
             ArrayList<String> pass = getArguments().getStringArrayList(ARG_PASSTHROUGH);
-            System.out.println(toTime(rectangles, 6));
 
             passthrough=new HashMap<>();
             String key,value;
@@ -105,99 +104,5 @@ public class fragment_meetingsuccess extends Fragment {
         }
 
         return v;
-    }
-
-    public static String toTime(InteractiveRectangle[][] rectangles, int startingHour) {
-        String time = "";
-        String tempTime = "";
-        boolean chainedSquares = false;
-
-
-        //Loops through each square within the table and converts it to a string that lists the available time
-        for (int a = 0; a < rectangles.length; a++) {
-            for (int b = 0; b < rectangles[a].length; b++) {
-                if (rectangles[a][b].getSelected()) {
-                    //If there is not chain going on when a selected square is encountered
-                    if (!chainedSquares) {
-                        time += startingHour + (a - 1) + ":" + ((b - 1) * 15);
-                        chainedSquares = true;
-                    }
-                    //If there is a chain going on when a selected square is encountered
-                    else {
-                        tempTime = " - " + startingHour + (a - 1) + ":" + ((b - 1) * 15);
-                    }
-                }
-                else {
-                    //If there is a chain going on when a non-selected square is encountered
-                    if (chainedSquares) {
-                        time += tempTime + ", ";
-                        chainedSquares = false;
-                    }
-                }
-            }
-        }
-
-        //Removes the extra comma at the end of the time string
-        time = time.substring(0, Math.max(time.length() - 2, 0));
-
-        return time;
-    }
-
-    public static String toTime(boolean[][] isSelected, int startingHour) {
-        String time = "";
-        String tempTime = "";
-        boolean chainedSquares = false;
-
-
-        //Loops through each square within the table and converts it to a string that lists the available time
-        for (int a = 1; a < isSelected.length; a++) {
-            for (int b = 1; b < isSelected[a].length; b++) {
-                if (isSelected[a][b]) {
-                    //If there is not chain going on when a selected square is encountered
-                    if (!chainedSquares) {
-                        //If the min time should end in 00
-                        if ((b - 1) == 0) {
-                            time += startingHour + (a - 1) + ":00";
-                        }
-                        //If the min time should end in a 15, 30, or 45
-                        else if ((b - 1) * 15 < 60) {
-                            time += startingHour + (a - 1) + ":" + ((b - 1) * 15);
-                        }
-                        //If the min time reaches 60 and should reset and increase the hour by 1
-                        else {
-                            time += startingHour + a + ":00";
-                        }
-
-                        chainedSquares = true;
-                    }
-                    //If there is a chain going on when a selected square is encountered
-                    else {
-                        if (b == 0) {
-                            tempTime = " - " + (startingHour + (a - 1)) + ":00";
-                        }
-                        //If the min time should end in a 15, 30, or 45
-                        else if (b * 15 < 60) {
-                            tempTime = " - " + (startingHour + (a - 1)) + ":" + (b * 15);
-                        }
-                        //If the min time reaches 60 and should reset and increase the hour by 1
-                        else {
-                            tempTime = " - " + (startingHour + a) + ":00";
-                        }
-                    }
-                }
-                else {
-                    //If there is a chain going on when a non-selected square is encountered
-                    if (chainedSquares) {
-                        time += tempTime + ", ";
-                        chainedSquares = false;
-                    }
-                }
-            }
-        }
-
-        //Removes the extra comma at the end of the time string
-        time = time.substring(0, Math.max(time.length() - 2, 0));
-
-        return time;
     }
 }
