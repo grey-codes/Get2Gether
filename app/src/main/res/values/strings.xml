@@ -29,4 +29,9 @@
     <string name="meeting_confirmed">Meeting Confirmed!</string>
     <string name="schedule_meeting">Schedule Meeting</string>
     <string name="meetingEntryDT">%s/%s/%s %s</string>
+    <string name="invalid_query_uri">Invalid Query</string>
+    <string name="insert_failed">insert failed</string>
+    <string name="invalid_insert_uri">invalid isner turi</string>
+    <string name="invalid_delete_uri">invalid delete uri</string>
+    <string name="invalid_update_uri">invalid update uri</string>
 </resources>
