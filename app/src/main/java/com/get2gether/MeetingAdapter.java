@@ -95,7 +95,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MyViewHo
         holder.display_name.setText(m.getTitle());
         int[] dateAr = m.getDateArray();
 
-        String s = holder.display_name.getContext().getString(R.string.meetingEntryDT, dateAr[0], dateAr[1], dateAr[2], m.getTimeString());
+        String s = holder.display_name.getContext().getString(R.string.meetingEntryDT, m.getMonth(), m.getDay(), m.getYear(), m.getTimeString());
 
         holder.display_time.setText(s);
     }

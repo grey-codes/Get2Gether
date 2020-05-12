@@ -1,7 +1,6 @@
 package com.get2gether;
 
 import android.content.Context;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ViewMeetingFragment extends Fragment {
     private MainActivity parentActivity;
@@ -36,18 +33,6 @@ public class ViewMeetingFragment extends Fragment {
 
         parentActivity = (MainActivity) getActivity();
         Context ctx = getContext();
-
-        ArrayList<String> participantList = new ArrayList<>();
-        participantList.add("Steven Eldridge");
-
-        String currentDateString = "05/23/2020 18:00:00";
-        SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date targetDate = new Date();
-        try {
-            targetDate = sd.parse(currentDateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         //meetingList = new ArrayList<>();
         //meetingList.add(new Meeting(0,targetDate,"Steven Eldridge","CS533 Group Project","7:15-8:45, 10:00-11:30, 14:30-17:15", participantList));

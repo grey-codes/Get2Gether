@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Meeting implements java.io.Serializable {
@@ -17,14 +17,14 @@ public class Meeting implements java.io.Serializable {
 
     private int id;
     private int status;
-    private java.util.Date date;
+    private GregorianCalendar date;
     private String owner;
     private String title;
     private boolean[][] timeGrid;
     private ArrayList<String> participants;
     private String idealTime = "";
 
-    public Meeting(int id, Date date, String owner, String title, String timeString, ArrayList<String> participants) {
+    public Meeting(int id, GregorianCalendar date, String owner, String title, String timeString, ArrayList<String> participants) {
         this.id = id;
         this.date = date;
         this.owner = owner;
@@ -33,7 +33,7 @@ public class Meeting implements java.io.Serializable {
         this.participants = participants;
     }
 
-    public Meeting(int id, Date date, String owner, String title, boolean[][] timeGrid, ArrayList<String> participants) {
+    public Meeting(int id, GregorianCalendar date, String owner, String title, boolean[][] timeGrid, ArrayList<String> participants) {
         this.id = id;
         this.date = date;
         this.owner = owner;
@@ -77,7 +77,7 @@ public class Meeting implements java.io.Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public GregorianCalendar getDate() {
         return date;
     }
 
@@ -102,8 +102,12 @@ public class Meeting implements java.io.Serializable {
         return Integer.toString(getDateArray()[1]);
     }
 
-    public void setDate(Date date) {
+    public void setDate(GregorianCalendar date) {
         this.date = date;
+    }
+
+    public String getYear() {
+        return Integer.toString(getDateArray()[2]);
     }
 
     public String getOwner() {
@@ -130,10 +134,6 @@ public class Meeting implements java.io.Serializable {
             }
             System.out.println();
         }
-    }
-
-    public String getYear() {
-        return Integer.toString(getDateArray()[2]);
     }
 
     public static boolean[][] stringToGrid(String str, int startingHour) {

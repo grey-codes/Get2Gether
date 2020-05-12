@@ -1,6 +1,5 @@
 package com.get2gether;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +13,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -137,20 +135,13 @@ public class fragment_makemeeting extends Fragment {
                 String monthValueDigit = "0";
                 for (int i = 0; i < monthCategories.length; i++) {
                     if (monthCategories[i].equals(monthValue)) {
-                        monthValueDigit = Integer.toString(i + 1);
+                        monthValueDigit = Integer.toString(i);
                     }
                 }
 
-                String currentDateString = String.format("%s/%s/%s", monthValueDigit, dayValue, yearValue);
-                SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
-                Date d = new Date();
-                try {
-                    d = sd.parse(currentDateString);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                GregorianCalendar gc = new GregorianCalendar(Integer.parseInt(yearValue), Integer.parseInt(monthValueDigit), Integer.parseInt(dayValue));
 
-                Meeting m = new Meeting(-1, d, parentActivity.googleAccount.getDisplayName(), textViewMeeting.getText().toString(), "", partList);
+                Meeting m = new Meeting(-1, gc, parentActivity.googleAccount.getDisplayName(), textViewMeeting.getText().toString(), "", partList);
 
                 Bundle bundle = new Bundle();
                 bundle.putInt(fragment_second.ARG_ACTION,fragment_second.ACTION_MAKEMEETING);
