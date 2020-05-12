@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
@@ -13,6 +14,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.legacy.content.WakefulBroadcastReceiver;
+import androidx.preference.PreferenceManager;
 
 import com.get2gether.data.DatabaseDescription;
 import com.get2gether.data.NotificationDatabaseHelper;
@@ -37,8 +39,10 @@ public class CustomNotifications extends WakefulBroadcastReceiver {
     public static void setupAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent alarmIntent = getStartPendingIntent(context);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int wait = preferences.getInt("notificationTime", 60);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() +
-                        5 * 1000,5*1000,               alarmIntent);
+                1000, wait * 1000, alarmIntent);
     }
 
     private ArrayList<Integer> getStoredNotifs(Context c) {
