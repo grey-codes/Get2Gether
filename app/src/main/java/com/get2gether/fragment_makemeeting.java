@@ -134,7 +134,14 @@ public class fragment_makemeeting extends Fragment {
 
                 ArrayList<String> partList = new ArrayList<String>(Arrays.asList(participants.split(",")));
 
-                String currentDateString = String.format("%s/%s/%s", dayValue, monthValue, yearValue);
+                String monthValueDigit = "0";
+                for (int i = 0; i < monthCategories.length; i++) {
+                    if (monthCategories[i].equals(monthValue)) {
+                        monthValueDigit = Integer.toString(i + 1);
+                    }
+                }
+
+                String currentDateString = String.format("%s/%s/%s", monthValueDigit, dayValue, yearValue);
                 SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
                 Date d = new Date();
                 try {

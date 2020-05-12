@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class fragment_meetingsuccess extends Fragment {
+    private MainActivity parentActivity;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_RECTANGLES = "rectangles";
@@ -67,6 +68,8 @@ public class fragment_meetingsuccess extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        parentActivity = (MainActivity) getActivity();
+
         View v = inflater.inflate(R.layout.fragment_meetingsuccess, container, false);
 
         Button goToMainPage = v.findViewById(R.id.goToMainPage);
@@ -79,6 +82,7 @@ public class fragment_meetingsuccess extends Fragment {
         });
 
         if (meeting != null) {
+            parentActivity.meetingNetwork.createMeeting(meeting);
             String title = meeting.getTitle();
             TextView tv = v.findViewById(R.id.textView4);
             tv.setText(getString(R.string.meeting_succ,title));

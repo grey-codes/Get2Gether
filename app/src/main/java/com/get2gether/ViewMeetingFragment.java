@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ViewMeetingFragment extends Fragment {
+    private MainActivity parentActivity;
     private ArrayList<Meeting> meetingList;
 
     @Override
@@ -33,6 +34,7 @@ public class ViewMeetingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        parentActivity = (MainActivity) getActivity();
         Context ctx = getContext();
 
         ArrayList<String> participantList = new ArrayList<>();
@@ -47,12 +49,25 @@ public class ViewMeetingFragment extends Fragment {
             e.printStackTrace();
         }
 
-        meetingList = new ArrayList<>();
-        meetingList.add(new Meeting(0,targetDate,"Steven Eldridge","CS533 Group Project","7:15-8:45, 10:00-11:30, 14:30-17:15", participantList));
+        //meetingList = new ArrayList<>();
+        //meetingList.add(new Meeting(0,targetDate,"Steven Eldridge","CS533 Group Project","7:15-8:45, 10:00-11:30, 14:30-17:15", participantList));
 
 
-        populateMeetings(ctx, view);
+        //populateMeetings(ctx, view);
 
+        parentActivity.meetingNetwork.getMeetings(meetings -> {
+            meetingList = meetings;
+
+            parentActivity.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    populateMeetings(ctx, view);
+
+                }
+            });
+        });
     }
 
     private void populateMeetings(Context ctx, View v) {

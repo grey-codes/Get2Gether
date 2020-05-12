@@ -23,6 +23,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    public MeetingNetwork meetingNetwork;
+
     public GoogleSignInClient mGoogleSignInClient;
     public GoogleSignInAccount googleAccount;
     NavigationView nv;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        meetingNetwork = new MeetingNetwork(googleAccount);
 
         DrawerLayout dl = findViewById(R.id.drawer_layout);
 
