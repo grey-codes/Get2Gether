@@ -1,5 +1,7 @@
 package com.get2gether;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -54,6 +56,15 @@ public class Meeting {
 
     public Date getDate() {
         return date;
+    }
+
+    public int[] getDateArray() {
+        LocalDate ld = getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int[] ar = new int[3];
+        ar[0] = ld.getDayOfMonth();
+        ar[1] = ld.getMonthValue();
+        ar[2] = ld.getYear();
+        return ar;
     }
 
     public void setDate(Date date) {

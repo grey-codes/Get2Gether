@@ -1,17 +1,12 @@
 package com.get2gether;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -95,8 +90,14 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.display_name.setText(mDataset.get(position).getTitle());
-        holder.display_time.setText(mDataset.get(position).getTimeString());
+        Meeting m = mDataset.get(position);
+
+        holder.display_name.setText(m.getTitle());
+        int[] dateAr = m.getDateArray();
+
+        String s = holder.display_name.getContext().getString(R.string.meetingEntryDT, dateAr[0], dateAr[1], dateAr[2], m.getTimeString());
+
+        holder.display_time.setText(s);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

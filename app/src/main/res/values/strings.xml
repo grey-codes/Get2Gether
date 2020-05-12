@@ -28,4 +28,5 @@
     <string name="meetingConfirmBody">Meeting "%s" has been set up at %s on %s/%s/%s.</string>
     <string name="meeting_confirmed">Meeting Confirmed!</string>
     <string name="schedule_meeting">Schedule Meeting</string>
+    <string name="meetingEntryDT">%d/%d/%d %s</string>
 </resources>
